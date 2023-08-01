@@ -1,0 +1,18 @@
+GET http://localhost:8000/todos
+
+###
+
+ POST http://localhost:8000/todo/new
+ Content-Type: application/json
+
+ {
+  "text": "This is AWESOME!"
+ }
+
+### 
+ 
+ DELETE http://localhost:8000/todo/delete/64c82ae7fa3488fdfc1d4c45
+
+###
+
+PUT http://localhost:8000/todo/complete/64c82a71fa3488fdfc1d4c3f
