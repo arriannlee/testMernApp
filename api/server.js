@@ -11,6 +11,14 @@ app.use(cors())
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 
+// Port Connection
+
+const PORT = 8000
+
+app.listen(PORT,() => console.log(`Server is running on ${PORT}`))
+
+// DB Connection
+
 mongoose.connect(process.env.DB_CONNECTION, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -19,6 +27,8 @@ mongoose.connect(process.env.DB_CONNECTION, {
   .catch((err) => {console.error(err)
 });
 
+// Server
+
 const Todo = require('./models/Todo')
 
 app.get('/todos', async (req,res) =>{
@@ -26,6 +36,8 @@ app.get('/todos', async (req,res) =>{
   
   res.json(todos);
 })
+
+// New 
 
 app.post('/todo/new', (req,res) => {
   const todo = new Todo ({
@@ -36,12 +48,15 @@ app.post('/todo/new', (req,res) => {
   res.json(todo)
 })
 
+// Delete
+
 app.delete('/todo/delete/:id', async (req, res) =>{
   const result = await Todo.findByIdAndDelete(req.params.id);
   
   res.json(result)
 })
-//  new task
+
+//  Complete
 
 app.get('/todo/complete/:id', async (req, res) =>{
   const todo = await Todo.findById(req.params.id);
@@ -53,6 +68,29 @@ app.get('/todo/complete/:id', async (req, res) =>{
   res.json(todo);
 })
 
-const PORT = 8000
+// Edit
 
-app.listen(PORT,() => console.log(`Server is running on ${PORT}`))
+app.put('/todo/edit/:id', async (req, res) => {
+    try{
+      const todoId = req.params.id;
+      const newText = req.body.text;
+
+      const updatedTodo = await Todo.findByIdAndUpdate(
+        todoId,
+        {text: newText},
+        {new: true}
+      );
+
+      if (!updatedTodo) {
+        return res.status(404).json({ error: 'Todo not found' });
+      }
+
+      res.json(updatedTodo);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Server Error' });
+    }
+  });
+
+
+
