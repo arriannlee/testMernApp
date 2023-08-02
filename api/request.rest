@@ -6,7 +6,7 @@ GET http://localhost:8000/todos
  Content-Type: application/json
 
  {
-  "text": "This is AWESOME!"
+  "text": "Banana"
  }
 
 ### 
@@ -16,3 +16,16 @@ GET http://localhost:8000/todos
 ###
 
 PUT http://localhost:8000/todo/complete/64c82a71fa3488fdfc1d4c3f
+
+###
+
+ POST http://localhost:8000/todo/new
+ Content-Type: application/json
+
+ {
+  "text": "Coding like a PRO!!"
+ }
+
+###
+
+GET http://localhost:8000/todo/complete/64ca370c122070e84347a443

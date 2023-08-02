@@ -41,14 +41,16 @@ app.delete('/todo/delete/:id', async (req, res) =>{
   
   res.json(result)
 })
+//  new task
 
-app.put('/todo/complete/:id', async (req, res) =>{
+app.get('/todo/complete/:id', async (req, res) =>{
   const todo = await Todo.findById(req.params.id);
   
-  todo.complete =!todo.complete
-  todo.save()
+  todo.complete = !todo.complete;
 
-  res.json(todo)
+  todo.save();
+
+  res.json(todo);
 })
 
 const PORT = 8000
