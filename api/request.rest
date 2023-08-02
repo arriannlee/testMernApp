@@ -32,4 +32,4 @@ GET http://localhost:8000/todo/complete/64ca370c122070e84347a443
 
 ###
 
-PUT http://localhost:8000/todo/edit/64ca412dae09125c80edd2b8
+PUT http://localhost:8000/todo/update/64ca412dae09125c80edd2b8

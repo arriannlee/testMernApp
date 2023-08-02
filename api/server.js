@@ -70,7 +70,7 @@ app.get('/todo/complete/:id', async (req, res) =>{
 
 // Edit
 
-app.put('/todo/edit/:id', async (req, res) => {
+app.put('/todo/update/:id', async (req, res) => {
     try{
       const todoId = req.params.id;
       const newText = req.body.text;
